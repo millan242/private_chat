@@ -1,9 +1,14 @@
-import { Elysia, t } from 'elysia'
+import { Elysia, t } from "elysia";
 
-const app = new Elysia({ prefix: '/api' })
-    .get('/user', { user: { name: 'Millan' } })
+const rooms = new Elysia({ prefix: "/room" }).post("/create", () => {
+  console.log(`CREATE A NEW ROOM!`);
+});
 
-export type app = typeof app
+const app = new Elysia({ prefix: "/api" })
+  .use(rooms)
+  .get("/user", { user: { name: "Millan" } });
 
-export const GET = app.fetch
-export const POST = app.fetch 
+export type app = typeof app;
+
+export const GET = app.fetch;
+export const POST = app.fetch;
